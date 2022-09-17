@@ -19,6 +19,7 @@ Array.from(itemCompleted).forEach((element) => {
 	element.addEventListener('click', markUnComplete);
 });
 
+//Declaring a asynchronous function called deleteIte,
 async function deleteItem() {
 	const itemText = this.parentNode.childNodes[1].innerText;
 	try {
