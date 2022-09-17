@@ -4,9 +4,11 @@ const deleteBtn = document.querySelectorAll('.fa-trash');
 const item = document.querySelectorAll('.item span');
 // creating a variable and assigning it to a selection of any span tag with a class of 'completed' that is inside of any element with a class of 'item'
 const itemCompleted = document.querySelectorAll('.item span.completed');
-
+// creating an array from aour selecvtion and then start a loop to iterate through it
 Array.from(deleteBtn).forEach((element) => {
+	// add an event listener to the current element that waits for a click to call a function called 'deleteItem'
 	element.addEventListener('click', deleteItem);
+	//closing loop
 });
 
 Array.from(item).forEach((element) => {
