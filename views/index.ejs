@@ -2,53 +2,34 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<!-- We're telling the browser to set up the proper compatibility for Microsoft Browsers -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<!-- Sets the width width of available viewing area to the width og the device screen -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>What do?</title>
+		<title>Document</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
-	<!-- main section for content that's being displayed in the DOM -->
 	<body>
-		<!-- Main heading  -->
 		<h1>Todo List:</h1>
-		<!-- Unordered list with a class of 'todoItems' -->
 		<ul class="todoItems">
-			<!-- Using ejs to start a for loop -->
 			<% for(let i=0; i < items.length; i++) {%>
-			<!-- Creates a list item with a class of 'item' for each iteration of the loop -->
 			<li class="item">
-				<!-- Checking if an item on an array has a property of 'completed: true' -->
 				<% if(items[i].completed === true) {%>
-				<!-- Creating an inline span with a class of 'completed', using ejs to display the name of the task, the class of completed will give us a specific formatting to display this specific task in the DOM -->
 				<span class="completed"><%= items[i].thing %></span>
-				<!-- ejs for the else clause of our if statement -->
 				<% }else{ %>
-				<!-- Creating an inline span with no class so it doesn't have a special formatting. , using ejs to display the name of the task -->
 				<span><%= items[i].thing %></span>
-				<!-- ejs to close the else statement -->
 				<% } %>
-				<!-- Creates a span the trash can icon -->
 				<span class="fa fa-trash"></span>
-				<!-- Closing list item -->
 			</li>
-			<!-- ejs to close the for loop -->
 			<% } %>
 		</ul>
-		<!-- Creates a h2 displaying the amount of task left to do using ejs -->
 		<h2>Left to do: <%= left %></h2>
-		<!-- Creates an h2 with a title indicating where to add a task -->
 		<h2>Add A Todo:</h2>
-		<!-- Creating a form with a POST method that is routing to /addTodo route  -->
 		<form action="/addTodo" method="POST">
-			<!-- Creating a input bar to input text indicating what is the task we are entering into out app -->
 			<input type="text" placeholder="Thing To Do" name="todoItem" />
-			<!-- Gives the form a submit button -->
 			<input type="submit" />
 		</form>
-		<!-- Links to the main.js file in the js folder inside the public folder -->
 		<script src="js/main.js"></script>
 	</body>
 </html>
+
+<!-- Comments in between lines in ejs can break the code  -->
