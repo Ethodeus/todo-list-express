@@ -1,24 +1,26 @@
-const express = require('express')
-const app = express()
-const MongoClient = require('mongodb').MongoClient
-const PORT = 2121
-require('dotenv').config()
+const express = require('express') //making it possible to use express methods in this file by declaring an express variable.
+const app = express() //renaming the call to express with a name of app
+const MongoClient = require('mongodb').MongoClient //makes it possible to use methods with MongoClient and talk to our db. 
+const PORT = 2121 //Declaring a constant and assign it it a value of 2121 to define the location where our server will be listening.
+require('dotenv').config() //allows us to look for or access variables inside the .env file
 
 
-let db,
-    dbConnectionStr = process.env.DB_STRING,
-    dbName = 'todo'
+let db, //declaring a variable globally so we can use it in multiple places
+    dbConnectionStr = process.env.DB_STRING, //Declaring a variable and assigng it a value equal to the DB_STRING variable found in the .env file. 
+    dbName = 'todo' //Declaring a variable and assigning it the name of the data base. 
 
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
-    .then(client => {
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }) //Creating a connection to MongoDB, and passing in out connection string. 
+    .then(client => { //waiting for the connection and proceeding if it is successful, also passing in all teh client information. 
         console.log(`Connected to ${dbName} Database`)
-        db = client.db(dbName)
+        db = client.db(dbName) //Assigning a value to a previously declared db variable that contains
     })
 
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+//Middleware
+
+app.set('view engine', 'ejs') // Setting our EJS as our default view engine. 
+app.use(express.static('public')) // Sets the location for static assets
+app.use(express.urlencoded({ extended: true })) //Tells express to decode and encode URLs where the header matches the content. 
+app.use(express.json()) //
 
 
 app.get('/', async (request, response) => {
