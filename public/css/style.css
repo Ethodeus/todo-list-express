@@ -1,7 +1,66 @@
-h1{
-    color: red;
+body {
+	background-color: #f8f8f8;
 }
-.completed{
-    color: gray;
-    text-decoration: line-through;
+
+ul {
+	padding: 0.5rem;
+}
+
+li {
+	list-style: none;
+	padding: 0.5rem;
+	margin: 0;
+	display: flex;
+	border: solid red 1px;
+	border-radius: 0.5rem;
+	margin-top: 0.2rem;
+	position: relative;
+}
+
+li > span.fa-flag {
+	width: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+li > span.todoName {
+	width: 60%;
+}
+
+li > label {
+	width: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+li > span.fa-trash-can {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	border: solid green 1px;
+	border-radius: 0.5rem;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+header {
+	display: flex;
+	justify-content: center;
+}
+.completed {
+	color: gray;
+	text-decoration: line-through;
+}
+
+.list-container {
+	display: flex;
+	border: solid #4285f4 2px;
+	flex-direction: column;
+	margin: 1rem;
+	border-radius: 1rem;
 }

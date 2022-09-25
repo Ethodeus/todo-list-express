@@ -1,33 +1,31 @@
-const express = require('express') //making it possible to use express methods in this file by declaring an express variable.
-const app = express() //renaming the call to express with a name of app
-const MongoClient = require('mongodb').MongoClient //makes it possible to use methods with MongoClient and talk to our db. 
-const PORT = 2121 //Declaring a constant and assign it it a value of 2121 to define the location where our server will be listening.
-require('dotenv').config() //allows us to look for or access variables inside the .env file
+const express = require('express')
+const app = express()
+const MongoClient = require('mongodb').MongoClient
+const PORT = 2121
+require('dotenv').config()
 
 
-let db, //declaring a variable globally so we can use it in multiple places
-    dbConnectionStr = process.env.DB_STRING, //Declaring a variable and assigng it a value equal to the DB_STRING variable found in the .env file. 
-    dbName = 'todo' //Declaring a variable and assigning it the name of the data base. 
+let db,
+    dbConnectionStr = process.env.DB_STRING,
+    dbName = 'todo'
 
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }) //Creating a connection to MongoDB, and passing in out connection string. 
-    .then(client => { //waiting for the connection and proceeding if it is successful, also passing in all teh client information. 
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
+    .then(client => {
         console.log(`Connected to ${dbName} Database`)
-        db = client.db(dbName) //Assigning a value to a previously declared db variable that contains
+        db = client.db(dbName)
+        console.log(db)
     })
 
-//Middleware
-
-app.set('view engine', 'ejs') // Setting our EJS as our default view engine. 
-app.use(express.static('public')) // Sets the location for static assets
-app.use(express.urlencoded({ extended: true })) //Tells express to decode and encode URLs where the header matches the content. 
-app.use(express.json()) //Parses JSON content. 
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 
-app.get('/', async (request, response) => { //Starts a GET method when the root route is passed in, sets up req and res parameters. 
-    const todoItems = await db.collection('todos').find().toArray() //Sets a variable and awaits an array todoItems and stores them in this variable
-    const itemsLeft = await db.collection('todos').countDocuments({ completed: false }) //Sets a variable and awaits a number of items that are not completed. 
-    response.render('index.ejs', { items: todoItems, left: itemsLeft }) //rendering the ejs file and passing through an object with the db of items and itemsLeft
-
+app.get('/', async (request, response) => {
+    const todoItems = await db.collection('todos').find().toArray()
+    const itemsLeft = await db.collection('todos').countDocuments({ completed: false })
+    response.render('index.ejs', { items: todoItems, left: itemsLeft })
     // db.collection('todos').find().toArray()
     // .then(data => {
     //     db.collection('todos').countDocuments({completed: false})
@@ -38,27 +36,27 @@ app.get('/', async (request, response) => { //Starts a GET method when the root 
     // .catch(error => console.error(error))
 })
 
-app.post('/addTodo', (request, response) => { //Cstarts a POST method when the add route is passed in, triggered by the form button
-    db.collection('todos').insertOne({ thing: request.body.todoItem, completed: false }) //Inserting a new item into the todos collection, using the value passed in through the form and also creating a property of completed in the item with a value of false.
-        .then(result => { //Ig insert is successful, do something
-            console.log('Todo Added') //Console log action
-            response.redirect('/') //Fets rid of the addToDo route and redirects back to the homepage. 
+app.post('/addTodo', (request, response) => {
+    db.collection('todos').insertOne({ thing: request.body.todoItem, completed: false, priority: false })
+        .then(result => {
+            console.log('Todo Added')
+            response.redirect('/')
         })
-        .catch(error => console.error(error)) //catching errors
-}) //ending POST method
+        .catch(error => console.error(error))
+})
 
-app.put('/markComplete', (request, response) => {//Starting a put method when the markComplete route is passed in
-    db.collection('todos').updateOne({ thing: request.body.itemFromJS }, { //Look in the data base for one item matching the name of the item pased in from the main.js file that was clicked on. 
+app.put('/markComplete', (request, response) => {
+    db.collection('todos').updateOne({ thing: request.body.itemFromJS }, {
         $set: {
-            completed: true //set completed status to true
+            completed: true
         }
     }, {
         sort: { _id: -1 },
-        upsert: false //prevents insertion if item does not already exist
+        upsert: false
     })
-        .then(result => { //If the update is successful
-            console.log('Marked Complete') //log successful update
-            response.json('Marked Complete') //respond to the main.js request in JSON indicating that the request was done
+        .then(result => {
+            console.log('Marked Complete')
+            response.json('Marked Complete')
         })
         .catch(error => console.error(error))
 
@@ -74,8 +72,8 @@ app.put('/markUnComplete', (request, response) => {
         upsert: false
     })
         .then(result => {
-            console.log('Marked Uncomplete')
-            response.json('Marked Uncomplete')
+            console.log('Marked Complete')
+            response.json('Marked Complete')
         })
         .catch(error => console.error(error))
 

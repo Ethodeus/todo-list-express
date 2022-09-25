@@ -5,23 +5,32 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>What now?</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/reset.css" />
 	</head>
 	<body>
-		<h1>Todo List:</h1>
-		<ul class="todoItems">
-			<% for(let i=0; i < items.length; i++) {%>
-			<li class="item">
-				<% if(items[i].completed === true) {%>
-				<span class="completed"><%= items[i].thing %></span>
-				<% }else{ %>
-				<span><%= items[i].thing %></span>
+		<header><h1>What Now?</h1></header>
+		<div class="list-container">
+			<ul class="todoItems">
+				<% for(let i=0; i < items.length; i++) {%>
+				<li class="item">
+					<span class="fa-solid fa-flag"></span>
+					<% if(items[i].completed === true) {%>
+					<span class="completed todoName"><%= items[i].thing %></span>
+					<% }else{ %>
+					<span class="todoName"><%= items[i].thing %></span>
+					<% } %>
+					<label class="checkbox-container">
+						<input type="checkbox" checked />
+						<div class="checkmark"></div>
+					</label>
+					<span class="fa-regular fa-trash-can"></span>
+				</li>
+
 				<% } %>
-				<span class="fa fa-trash"></span>
-			</li>
-			<% } %>
-		</ul>
+			</ul>
+		</div>
 		<h2>Left to do: <%= left %></h2>
 		<h2>Add A Todo:</h2>
 		<form action="/addTodo" method="POST">
