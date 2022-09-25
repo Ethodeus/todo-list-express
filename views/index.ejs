@@ -15,16 +15,18 @@
 			<ul class="todoItems">
 				<% for(let i=0; i < items.length; i++) {%>
 				<li class="item">
-					<span class="fa-solid fa-flag"></span>
+					<span class="fa-regular fa-flag"></span>
 					<% if(items[i].completed === true) {%>
 					<span class="completed todoName"><%= items[i].thing %></span>
 					<% }else{ %>
 					<span class="todoName"><%= items[i].thing %></span>
 					<% } %>
-					<label class="checkbox-container">
-						<input type="checkbox" checked />
-						<div class="checkmark"></div>
-					</label>
+					<div class="checkbox">
+						<label class="checkbox-container">
+							<input type="checkbox" checked />
+							<div class="checkmark"></div>
+						</label>
+					</div>
 					<span class="fa-regular fa-trash-can"></span>
 				</li>
 

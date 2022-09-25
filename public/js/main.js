@@ -7,11 +7,11 @@ Array.from(deleteBtn).forEach((element) => {
 })
 
 Array.from(item).forEach((element) => {
-	element.addEventListener('click', markComplete)
+	element.addEventListener('click', (e) => markComplete(e))
 })
 
 Array.from(itemCompleted).forEach((element) => {
-	element.addEventListener('click', markUnComplete)
+	element.addEventListener('click', (e) => markUnComplete(e))
 })
 
 async function deleteItem() {
@@ -33,8 +33,9 @@ async function deleteItem() {
 	}
 }
 
-async function markComplete() {
-	const itemText = document.querySelector('.todoName').innerText
+async function markComplete(event) {
+	const itemText = event.target.innerText
+	console.log(itemText)
 	try {
 		const response = await fetch('markComplete', {
 			method: 'put',
@@ -52,8 +53,9 @@ async function markComplete() {
 	}
 }
 
-async function markUnComplete() {
-	const itemText = document.querySelector('.todoName').innerText
+async function markUnComplete(event) {
+	const itemText = event.target.innerText
+	console.log(itemText)
 	try {
 		const response = await fetch('markUnComplete', {
 			method: 'put',
