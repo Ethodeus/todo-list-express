@@ -6,7 +6,6 @@ html * {
 
 body {
 	background-color: #f1f5fe;
-	padding: 0 5rem;
 }
 
 .list-container {
@@ -29,48 +28,57 @@ li {
 	/* padding: 0.8rem 0; */
 	margin: 0 0;
 	display: flex;
-	/* border: solid rgb(223, 242, 250) 1px; */
+	/* border: solid rgb(249, 19, 84) 1px; */
 	border-radius: 0.5rem;
 	position: relative;
 	background-color: white;
 }
 
 li > span.fa-flag {
-	width: 10%;
+	width: 15%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	color: #ccd0d8;
 	font-size: 1.3rem;
-	border-right: solid #f1f5fe 3px;
+	border-right: solid #f1f5fe 0.3rem;
 	padding: 1rem 0;
 	cursor: pointer;
 }
 
 li > span.fa-flag:hover {
-	color: rgb(255, 143, 143);
+	color: #47da99;
+	cursor: pointer;
+}
+
+li > span.priority {
+	color: #47da99;
 	cursor: pointer;
 }
 
 li > span.todoName {
-	width: 70%;
+	width: 60%;
 	padding: 0.5rem 1rem;
+	padding-right: 0.5rem;
 	display: flex;
 	align-items: center;
 }
 
 li > span.fa-trash-can {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	border: solid rgb(255, 187, 187) 2px;
-	border-radius: 0.5rem;
-	top: 0;
-	left: 0;
+	width: 15%;
+	padding: 0.5rem 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	display: none;
+	text-align: center;
+	border-left: solid #f1f5fe 0.3rem;
+	color: rgb(255, 143, 143);
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+
+li > span.fa-trash-can:hover {
+	color: red;
 }
 
 header {
@@ -85,11 +93,12 @@ header {
 /* CHECKBOX STYLING */
 
 div.checkbox {
-	width: 20%;
+	width: 10%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 1rem 0;
+	margin-right: 0.5rem;
 }
 
 .checkbox-container input {
@@ -113,8 +122,8 @@ div.checkbox {
 	position: relative;
 	top: 0;
 	left: 0;
-	height: 1.3em;
-	width: 1.3em;
+	height: 1.1em;
+	width: 1.1em;
 	background-color: #ccc;
 	transition: all 0.3s;
 	border-radius: 5px;
@@ -141,10 +150,10 @@ div.checkbox {
 
 /* Style the checkmark/indicator */
 .checkbox-container .checkmark:after {
-	left: 0.45em;
+	left: 0.4em;
 	top: 0.25em;
-	width: 0.33em;
-	height: 0.6em;
+	width: 0.3em;
+	height: 0.5em;
 	border: solid white;
 	border-width: 0 0.15em 0.15em 0;
 	transform: rotate(45deg);

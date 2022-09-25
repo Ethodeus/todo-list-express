@@ -23,6 +23,10 @@ app.use(express.json())
 
 app.get('/', async (request, response) => {
     const todoItems = await db.collection('todos').find().toArray()
+    // const sortedTodoItems = todoItems.sort((i) => {
+    //     return i.priority ? -1 : 1 // If i.priority is true we move it -1 index towards the beginning of the array, if it is false we move it 1 index towards the end of the array
+    // })
+    // console.log(sortedTodoItems)
     const itemsLeft = await db.collection('todos').countDocuments({ completed: false })
     response.render('index.ejs', { items: todoItems, left: itemsLeft })
     // db.collection('todos').find().toArray()
@@ -36,8 +40,9 @@ app.get('/', async (request, response) => {
 })
 
 app.post('/addTodo', (request, response) => {
-    db.collection('todos').insertOne({ thing: request.body.todoItem, completed: false, priority: false })
+    db.collection('todos').insertOne({ thing: request.body.todoItem.trim(), completed: false, priority: false })
         .then(result => {
+            console.log(request.body.todoItem.trim())
             console.log('Todo Added')
             response.redirect('/')
         })
@@ -71,8 +76,25 @@ app.put('/markUnComplete', (request, response) => {
         upsert: false
     })
         .then(result => {
-            console.log('Marked Complete')
-            response.json('Marked Complete')
+            console.log('Marked Uncomplete')
+            response.json('Marked Uncomplete')
+        })
+        .catch(error => console.error(error))
+
+})
+
+app.put('/markAsPriority', (request, response) => {
+    db.collection('todos').updateOne({ thing: request.body.itemFromJS }, {
+        $set: {
+            priority: true
+        }
+    }, {
+        sort: { _id: -1 },
+        upsert: false
+    })
+        .then(result => {
+            console.log('Marked as priority')
+            response.json('Marked as priority')
         })
         .catch(error => console.error(error))
 
