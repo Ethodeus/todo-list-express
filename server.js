@@ -23,10 +23,9 @@ app.use(express.json())
 
 app.get('/', async (request, response) => {
     const todoItems = await db.collection('todos').find().toArray()
-    // const sortedTodoItems = todoItems.sort((i) => {
-    //     return i.priority ? -1 : 1 // If i.priority is true we move it -1 index towards the beginning of the array, if it is false we move it 1 index towards the end of the array
-    // })
-    // console.log(sortedTodoItems)
+    const sortedTodoItems = todoItems.sort((i) => {
+        return i.priority ? -1 : 1 // If i.priority is true we move it -1 index towards the beginning of the array, if it is false we move it 1 index towards the end of the array
+    })
     const itemsLeft = await db.collection('todos').countDocuments({ completed: false })
     response.render('index.ejs', { items: todoItems, left: itemsLeft })
     // db.collection('todos').find().toArray()
