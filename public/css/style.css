@@ -5,7 +5,7 @@ html * {
 }
 
 body {
-	background-color: #f1f5fe;
+	background-color: #f1f1f1;
 }
 
 .list-container {
@@ -20,7 +20,7 @@ ul {
 	padding: 0.5rem;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 1rem;
 }
 
 li {
@@ -31,7 +31,6 @@ li {
 	/* border: solid rgb(249, 19, 84) 1px; */
 	border-radius: 0.5rem;
 	position: relative;
-	background-color: white;
 }
 
 li > span.fa-flag {
@@ -41,9 +40,10 @@ li > span.fa-flag {
 	justify-content: center;
 	color: #ccd0d8;
 	font-size: 1.3rem;
-	border-right: solid #f1f5fe 0.3rem;
+	background-color: white;
 	padding: 1rem 0;
 	cursor: pointer;
+	border-radius: 0.5rem 0 0 0.5rem;
 }
 
 li > span.fa-flag:hover {
@@ -62,6 +62,8 @@ li > span.todoName {
 	padding-right: 0.5rem;
 	display: flex;
 	align-items: center;
+	background-color: white;
+	margin-left: 0.5rem;
 }
 
 li > span.fa-trash-can {
@@ -71,10 +73,11 @@ li > span.fa-trash-can {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	border-left: solid #f1f5fe 0.3rem;
+	background-color: white;
 	color: rgb(255, 143, 143);
 	font-size: 1.5rem;
 	cursor: pointer;
+	border-radius: 0 0.5rem 0.5rem 0;
 }
 
 li > span.fa-trash-can:hover {
@@ -99,6 +102,7 @@ div.checkbox {
 	justify-content: center;
 	padding: 1rem 0;
 	margin-right: 0.5rem;
+	background-color: white;
 }
 
 .checkbox-container input {

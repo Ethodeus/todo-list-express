@@ -99,6 +99,22 @@ app.put('/markAsPriority', (request, response) => {
 
 })
 
+app.put('/unmarkAsPriority', (request, response) => {
+    db.collection('todos').updateOne({ thing: request.body.itemFromJS }, {
+        $set: {
+            priority: false
+        }
+    }, {
+        sort: { _id: -1 },
+        upsert: false
+    })
+        .then(result => {
+            console.log('Unarked as priority')
+            response.json('Unarked as priority')
+        })
+        .catch(error => console.error(error))
+})
+
 app.delete('/deleteItem', (request, response) => {
     db.collection('todos').deleteOne({ thing: request.body.itemFromJS })
         .then(result => {
