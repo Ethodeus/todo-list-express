@@ -1,8 +1,11 @@
 const deleteBtn = document.querySelectorAll('.fa-trash-can')
-const item = document.querySelectorAll('.item span')
-const itemCompleted = document.querySelectorAll('.item span.completed')
 const itemPriority = document.querySelectorAll('.item span.fa-flag')
 const notItemPriority = document.querySelectorAll('.item span.priority')
+const checkbox = document.querySelectorAll('input[type="checkbox"]')
+
+Array.from(checkbox).forEach((element) => {
+	element.addEventListener('click', (e) => isChecked(e))
+})
 
 Array.from(itemPriority).forEach((element) => {
 	element.addEventListener('click', (e) => markAsPriority(e))
@@ -14,14 +17,6 @@ Array.from(notItemPriority).forEach((element) => {
 
 Array.from(deleteBtn).forEach((element) => {
 	element.addEventListener('click', deleteItem)
-})
-
-Array.from(item).forEach((element) => {
-	element.addEventListener('click', (e) => markComplete(e))
-})
-
-Array.from(itemCompleted).forEach((element) => {
-	element.addEventListener('click', (e) => markUnComplete(e))
 })
 
 async function markAsPriority(event) {
@@ -81,42 +76,42 @@ async function deleteItem() {
 	}
 }
 
-async function markComplete(event) {
-	const itemText = event.target.innerText
+async function isChecked(event) {
+	const itemText = event.target.parentNode.parentNode.parentNode.childNodes[3].innerText
 	console.log(itemText)
-	try {
-		const response = await fetch('markComplete', {
-			method: 'put',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				'itemFromJS': itemText
+
+	if (event.target.checked) {
+		try {
+			const response = await fetch('markComplete', {
+				method: 'put',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					'itemFromJS': itemText
+				})
 			})
-		})
-		const data = await response.json()
-		console.log(data)
-		location.reload()
+			const data = await response.json()
+			console.log(data)
+			location.reload()
 
-	} catch (err) {
-		console.log(err)
-	}
-}
+		} catch (err) {
+			console.log(err)
+		}
 
-async function markUnComplete(event) {
-	const itemText = event.target.innerText
-	console.log(itemText)
-	try {
-		const response = await fetch('markUnComplete', {
-			method: 'put',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				'itemFromJS': itemText
+	} else {
+		try {
+			const response = await fetch('markUnComplete', {
+				method: 'put',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					'itemFromJS': itemText
+				})
 			})
-		})
-		const data = await response.json()
-		console.log(data)
-		location.reload()
+			const data = await response.json()
+			console.log(data)
+			location.reload()
 
-	} catch (err) {
-		console.log(err)
+		} catch (err) {
+			console.log(err)
+		}
 	}
 }

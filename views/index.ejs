@@ -21,18 +21,20 @@
 					<span class="fa-regular fa-flag"></span>
 					<% } %> <% if(items[i].completed === true) {%>
 					<span class="completed todoName"><%= items[i].thing %></span>
+					<div class="checkbox">
+						<label class="checkbox-container">
+							<input type="checkbox" checked/>
 					<% }else{ %>
 					<span class="todoName"><%= items[i].thing %></span>
-					<% } %>
 					<div class="checkbox">
 						<label class="checkbox-container">
 							<input type="checkbox" />
+					<% } %>
 							<div class="checkmark"></div>
 						</label>
 					</div>
 					<span class="fa-regular fa-trash-can"></span>
 				</li>
-
 				<% } %>
 			</ul>
 		</div>
