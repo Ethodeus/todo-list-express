@@ -38,11 +38,10 @@
 				<% } %>
 			</ul>
 		</div>
-		<h2>Left to do: <%= left %></h2>
-		<h2>Add A Todo:</h2>
+		<h2 id='itemsLeft'>Left to do: <%= left %></h2>
 		<form action="/addTodo" method="POST">
-			<input type="text" placeholder="Thing To Do" name="todoItem" />
-			<input type="submit" />
+			<input id='textInput' type="text" placeholder="Type your next task here..." name="todoItem" />
+			<button id='submitButton' type="submit"><i class="fa-regular fa-plus"></i></button>
 		</form>
 		<script src="js/main.js"></script>
 	</body>

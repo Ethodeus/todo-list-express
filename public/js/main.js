@@ -16,7 +16,7 @@ Array.from(notItemPriority).forEach((element) => {
 })
 
 Array.from(deleteBtn).forEach((element) => {
-	element.addEventListener('click', deleteItem)
+	element.addEventListener('click', (e) => deleteItem(e))
 })
 
 async function markAsPriority(event) {
@@ -57,8 +57,9 @@ async function unmarkAsPriority(event) {
 	}
 }
 
-async function deleteItem() {
-	const itemText = document.querySelector('.todoName').innerText
+async function deleteItem(event) {
+	const itemText = event.target.parentNode.childNodes[3].innerText
+	console.log(itemText)
 	try {
 		const response = await fetch('deleteItem', {
 			method: 'delete',
