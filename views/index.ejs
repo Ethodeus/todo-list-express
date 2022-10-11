@@ -1,50 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>What now?</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/reset.css" />
-	</head>
-	<body>
-		<header><h1>What Now?</h1></header>
-		<div class="list-container">
-			<ul class="todoItems">
-				<% for(let i=0; i < items.length; i++) {%>
-				<li class="item">
-					<% if (items[i].priority === true) {%>
-					<span class="fa-solid fa-flag priority"></span>
-					<% }else{ %>
-					<span class="fa-regular fa-flag"></span>
-					<% } %> <% if(items[i].completed === true) {%>
-					<span class="completed todoName"><%= items[i].thing %></span>
-					<div class="checkbox">
-						<label class="checkbox-container">
-							<input type="checkbox" checked/>
-					<% }else{ %>
-					<span class="todoName"><%= items[i].thing %></span>
-					<div class="checkbox">
-						<label class="checkbox-container">
-							<input type="checkbox" />
-					<% } %>
-							<div class="checkmark"></div>
-						</label>
-					</div>
-					<span class="fa-regular fa-trash-can"></span>
-				</li>
-				<% } %>
-			</ul>
-		</div>
-		<h2 id='itemsLeft'>Left to do: <%= left %></h2>
-		<form action="/addTodo" method="POST">
-			<input id='textInput' type="text" placeholder="Type your next task here..." name="todoItem" />
-			<button id='submitButton' type="submit"><i class="fa-regular fa-plus"></i></button>
-		</form>
-		<script src="js/main.js"></script>
-	</body>
-</html>
 
-<!-- Comments in between lines in ejs can break the code  -->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Create A Todo List By Clicking The Button Below</h1>
+  <a href="/todos"> New Todo List</a>
+</body>
+
+</html>
