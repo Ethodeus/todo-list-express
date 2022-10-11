@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const connectDB = require('./config/db')
 const homeRoutes = require('./routes/home')
+const todoRoutes = require('./routes/todos')
 
 require('dotenv').config({ path: './config/.env' })
 
@@ -13,7 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use('/', homeRoutes)
-// app.use('/todos', todoRoutes)
+app.use('/todos', todoRoutes)
 
 // app.get('/', async (request, response) => {
 //     const todoItems = await db.collection('todos').find().toArray()

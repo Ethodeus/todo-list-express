@@ -11,7 +11,6 @@ const TodoSchema = new mongoose.Schema({
   },
   priority: {
     type: Boolean,
-    required: true,
   }
 })
 

@@ -24,12 +24,12 @@
         <% }else{ %>
         <span class="fa-regular fa-flag"></span>
         <% } %> <% if(items[i].completed === true) {%>
-        <span class="completed todoName"><%= items[i].thing %></span>
+        <span class="completed todoName"><%= items[i].todo %></span>
         <div class="checkbox">
           <label class="checkbox-container">
             <input type="checkbox" checked />
             <% }else{ %>
-            <span class="todoName"><%= items[i].thing %></span>
+            <span class="todoName"><%= items[i].todo %></span>
             <div class="checkbox">
               <label class="checkbox-container">
                 <input type="checkbox" />
@@ -43,7 +43,7 @@
     </ul>
   </div>
   <h2 id='itemsLeft'>Left to do: <%= left %></h2>
-  <form action="/addTodo" method="POST">
+  <form action="/todos/createTodo" method="POST">
     <input id='textInput' type="text" placeholder="Type your next task here..." name="todoItem" />
     <button id='submitButton' type="submit"><i class="fa-regular fa-plus"></i></button>
   </form>
