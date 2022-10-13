@@ -19,24 +19,44 @@ Array.from(deleteBtn).forEach((element) => {
 	element.addEventListener('click', (e) => deleteItem(e))
 })
 
-// async function markAsPriority(event) {
-// 	const itemText = event.target.parentNode.childNodes[3].innerText
-// 	try {
-// 		const response = await fetch('markAsPriority', {
-// 			method: 'put',
-// 			headers: { 'Content-Type': 'application/json' },
-// 			body: JSON.stringify({
-// 				'itemFromJS': itemText
-// 			})
-// 		})
-// 		const data = await response.json()
-// 		console.log(data)
-// 		location.reload()
+async function markAsPriority(event) {
+	const itemId = event.target.parentNode.dataset.id
 
-// 	} catch (err) {
-// 		console.log(err)
-// 	}
-// }
+	if (!event.target.classList.contains('priority')) {
+		try {
+			const response = await fetch('todos/markAsPriority', {
+				method: 'put',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					'todoIdFromJSFile': itemId
+				})
+			})
+			const data = await response.json()
+			console.log(data)
+			location.reload()
+
+		} catch (err) {
+			console.log(err)
+		}
+	} else {
+		try {
+			const response = await fetch('todos/unmarkAsPriority', {
+				method: 'put',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					'todoIdFromJSFile': itemId
+				})
+			})
+			const data = await response.json()
+			console.log(data)
+			location.reload()
+
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
+}
 
 // async function unmarkAsPriority(event) {
 // 	const itemText = event.target.parentNode.childNodes[3].innerText
@@ -57,25 +77,25 @@ Array.from(deleteBtn).forEach((element) => {
 // 	}
 // }
 
-// async function deleteItem(event) {
-// 	const itemText = event.target.parentNode.childNodes[3].innerText
-// 	console.log(itemText)
-// 	try {
-// 		const response = await fetch('deleteItem', {
-// 			method: 'delete',
-// 			headers: { 'Content-Type': 'application/json' },
-// 			body: JSON.stringify({
-// 				'itemFromJS': itemText
-// 			})
-// 		})
-// 		const data = await response.json()
-// 		console.log(data)
-// 		location.reload()
+async function deleteItem(event) {
+	const itemId = event.target.parentNode.dataset.id
+	console.log(itemId)
+	try {
+		const response = await fetch('todos/deleteTodo', {
+			method: 'delete',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				'todoIdFromJSFile': itemId
+			})
+		})
+		const data = await response.json()
+		console.log(data)
+		location.reload()
 
-// 	} catch (err) {
-// 		console.log(err)
-// 	}
-// }
+	} catch (err) {
+		console.log(err)
+	}
+}
 
 async function isChecked(event) {
 	const itemText = event.target.parentNode.parentNode.parentNode.dataset.id
