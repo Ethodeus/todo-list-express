@@ -18,7 +18,7 @@
   <div class="list-container">
     <ul class="todoItems">
       <% for(let i=0; i < items.length; i++) {%>
-      <li class="item">
+      <li class="item" data-id='<%=items[i]._id%>'>
         <% if (items[i].priority === true) {%>
         <span class="fa-solid fa-flag priority"></span>
         <% }else{ %>
